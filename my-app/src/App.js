@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App-header">
       <Typography color="orange"><h2>To proceed you must link your Strava</h2></Typography>
-      <a href="https://www.strava.com/oauth/authorize?client_id=98457&redirect_uri=http://localhost:3000/StravaAutoMap/&response_type=code&scope=read_all,activity:read_all,activity:write">Connect to Strava</a>
+      <a href="https://www.strava.com/oauth/authorize?client_id=98457&redirect_uri=http://danielzfinger.github.io/StravaAutoMap/&response_type=code&scope=read_all,activity:read_all,activity:write">Connect to Strava</a>
       <Button sx={{m:"2%"}} disabled={code1 != null ? false : true} variant="contained" onClick={async () => {const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<BrowserRouter><CustomStravaUpload/></BrowserRouter>)}}>Create an activity</Button>
     </div>
