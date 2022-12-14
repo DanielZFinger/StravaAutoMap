@@ -1,31 +1,39 @@
+import './App.css';
 import React, { useState, useEffect, useContext } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
-import ReactDOM from 'react-dom/client';
 import Confirmation from './confirmation'
+import CustomStravaUpload from './CustomStravaUpload'
 import UploadSelection from './UploadSelection';
 import { useNavigate, Link } from 'react-router-dom';
-
+import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom/client';
+import Typography from '@mui/material/Typography';
+import {BrowserRouter, Routes,Route, Router} from 'react-router-dom';
+import fakegpx from './full_test.gpx'
 
 const auth_link="https://www.strava.com/oauth/token"
 let ACCESS_TOKEN;
 
-function StravaUpload(){
+function MapUpload(){
     // variables needed to make activity
     let NAME;
-    let TYPE;
+    let TYPE="Hike";
     let SET_TIME;
     let MOVE_TIME;
     let STRAVA_DESCRIPTION;
-    let ACTIVITY_DIST;
+    let DATA_TYPE="gpx";
+    let TRAIL;
 
     const activitieOPTS = [
         {value: 'Run', label: 'Run',},{ value: 'Hike',label: 'Hike', }
       ];
       const possibleYears = [
         {value: '2022',label: '2022',},{value: '2023',label: '2023',}
+      ];
+      const hikingTrails = [
+        {value: 'PCT',label: 'Pacific Crest Trail',},{value: 'CT',label: 'Colrado Trail',}
       ];
 
       const [value, setValue] = useState("0.0");
@@ -34,30 +42,15 @@ function StravaUpload(){
       let day;
       let hour;
       let min;
-
     return(
         <div>
-        <div className="App-header">
+        <div className='App-header'>
             <Typography color="orange"><h2>Upload</h2></Typography>
             <Button sx={{m:"1%"}}variant="contained" onClick={async () => {const root = ReactDOM.createRoot(document.getElementById('root'));root.render(<UploadSelection/>)}}>Go back</Button>
-
-            {/* Getting info to update users activity--all this info is from text field user fills out--paramaters are forced so the data is valid */}
-
-            {/* ACTIIVITY TITLE DESCRIPTION */}
+           {/* ACTIVITY TITLE DESCRIPTION */}
             <TextField
-              onChange={(name) => {
+onChange={(name) => {
                 NAME=name.target.value}} helperText="Title of activity"/>
-                {/* TYPE OF ACTIVITY */}
-                <TextField
-              onChange={(type) => {
-                TYPE=type.target.value}} select
-                label="Activity Type" helperText="Activity Type">
-                    {activitieOPTS.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
         </div>
         <div className="line">
         {/* START TIME OF ACTIVITY */}
@@ -93,24 +86,27 @@ function StravaUpload(){
                 <TextField
               onChange={(desc) => {
                 STRAVA_DESCRIPTION=desc.target.value}}helperText="Activity description"/>
-                {/* ACTIVITY DISTANCE */}
-                <TextField type="number" InputProps={{ inputProps: { min: 0, max: 10000 } }}
-              onChange={(dist) =>{
-                ACTIVITY_DIST=dist.target.value*1000}} helperText="Distance in km"/>
+                {/* WHICH TRAIL MAP IS BEING GENERATED */}
+                <TextField  select
+                label="Trail"
+              onChange={(trail1) => {
+                TRAIL=trail1.target.value}}helperText="Trail">{hikingTrails.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}</TextField>
 
-                {/* Submit all th data just entered above */}
+                  {/* Submit all th data just entered above */}
 
-            <Button sx={{p:"1%"}}variant="contained" onClick={async() =>{getToken();const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Confirmation/>)}}>Submit Activity</Button>
-        </div>
-        </div>
+            <Button sx={{p:"1%"}}variant="contained" onClick={async() =>{getToken()}}>Submit Activity</Button>
+                </div>
+                </div>
     )
-
 
     function uploadActivity(res1){
         ACCESS_TOKEN=res1.access_token;
         // calling api to pass our data with user token to make a strava activity
-        const Upload_Link = 'https://www.strava.com/api/v3/activities?name='+NAME+'&type='+TYPE+'&sport_type='+TYPE+'&start_date_local='+SET_TIME+'&elapsed_time='+MOVE_TIME+'&description='+STRAVA_DESCRIPTION+'&distance='+ACTIVITY_DIST+'&trainer=1'
+        const Upload_Link = 'https://www.strava.com/api/v3/uploads?name='+NAME+'&type='+TYPE+'&description='+STRAVA_DESCRIPTION+'&file='+{fakegpx}+'&data_type=gpx'
         fetch(Upload_Link,{
           method: 'post',
           headers:{
@@ -143,6 +139,7 @@ root.render(<Confirmation/>)}}>Submit Activity</Button>
           })
         }).then(res => res.json()).then(res => uploadActivity(res))
       }
-      
+
 }
-export default StravaUpload;
+
+export default MapUpload;

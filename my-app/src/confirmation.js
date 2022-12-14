@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useEffect, useContext } from 'react';
 import Button from '@mui/material/Button';
 import CustomStravaUpload from './CustomStravaUpload'
+import UploadSelection from './UploadSelection';
 import { useNavigate, Link } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom/client';
@@ -17,8 +18,7 @@ function confirmPage(){
     return(
         <div className="App-header">
             <Typography color="orange"><h2>Activity has been Uploaded</h2></Typography>
-            <Button sx={{m:"1%"}}variant="contained" onClick={async () => {const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<CustomStravaUpload/>)}}>Post another activity</Button>
+            <Button sx={{m:"1%"}}variant="contained" onClick={async () => {const root = ReactDOM.createRoot(document.getElementById('root'));root.render(<UploadSelection/>)}}>Post another activity</Button>
             <Button sx={{m:"1%"}}variant="contained" onClick={async()=>{;window.location.href = "https://danielzfinger.github.io/StravaAutoMap/";}}>Quit Application</Button>
             <Typography sx={{fontSize:"60%",ml:"20%",mr:"20%"}}color="grey"><p>Clicking 'Quit Application' will de-authorize your token and redirect you to the main page.</p></Typography>
             <Typography sx={{fontSize:"60%",ml:"20%",mr:"20%"}}color="grey"><p>This link will still exist however no more calls to Strava will be approved.</p></Typography>
