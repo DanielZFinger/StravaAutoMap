@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  /* background-color: #a5a5a5; */
 }
 
 .App-logo {
@@ -12,10 +13,19 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.line{
+  /* border: 1px solid black; */
+    /* width: 70px; */
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  /* background-color: #282c34; */
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
