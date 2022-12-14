@@ -3,7 +3,9 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
-// import { useNavigate, Link } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
+import Confirmation from './confirmation'
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const auth_link="https://www.strava.com/oauth/token"
@@ -96,7 +98,8 @@ function StravaUpload(){
 
                 {/* Submit all th data just entered above */}
 
-            <Button sx={{p:"1%"}}variant="contained" onClick={async() =>{getToken()}}>Submit Activity</Button>
+            <Button sx={{p:"1%"}}variant="contained" onClick={async() =>{getToken();const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Confirmation/>)}}>Submit Activity</Button>
         </div>
         </div>
     )
