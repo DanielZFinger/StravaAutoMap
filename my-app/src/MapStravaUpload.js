@@ -6,20 +6,26 @@ import MenuItem from '@mui/material/MenuItem';
 import Confirmation from './confirmation'
 import CustomStravaUpload from './CustomStravaUpload'
 import UploadSelection from './UploadSelection';
+// import Gpx from "gpx-parser-builder";
 import { useNavigate, Link } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom/client';
 import Typography from '@mui/material/Typography';
 import {BrowserRouter, Routes,Route, Router} from 'react-router-dom';
-import fakegpx from './full_test.gpx'
+import fakegpx from 'localhost:3000?StravaAutoMap/tesytestbaby.gpx'
 
 const auth_link="https://www.strava.com/oauth/token"
 let ACCESS_TOKEN;
+let FILE_FORMATTED
+const fs = require('./tesytestbaby.gpx')
+// fs.readFile('tesytestbaby.gpx', 'utf8',(err,data) => {if(err){console.log(err);return;}console.log("here is our fun data stuff ",data)})
+
+
 
 function MapUpload(){
     // variables needed to make activity
     let NAME;
-    let TYPE="Hike";
+    let TYPE;
     let SET_TIME;
     let MOVE_TIME;
     let STRAVA_DESCRIPTION;
@@ -106,7 +112,15 @@ onChange={(name) => {
     function uploadActivity(res1){
         ACCESS_TOKEN=res1.access_token;
         // calling api to pass our data with user token to make a strava activity
-        const Upload_Link = 'https://www.strava.com/api/v3/uploads?name='+NAME+'&type='+TYPE+'&description='+STRAVA_DESCRIPTION+'&file='+{fakegpx}+'&data_type=gpx'
+        const Upload_Link = 'https://www.strava.com/api/v3/uploads?name='+NAME+'&type='+TYPE+'&description='+STRAVA_DESCRIPTION+'&data_type=gpx'
+        // let w = window.open('tesytestbaby.gpx');
+        // w.print();
+        // var testString = JSON.stringify(fakegpx)
+        // fetch(fakegpx).then(response => console.log(response.json()))
+        // fs.readFile('tesytestbaby.gpx', 'utf8',(err,data) => {if(err){console.log(err);return;}console.log("here is our fun data stuff ",data)})
+        // fetch(fs).then(response =>
+        // console.log("post above log");
+        // console.log("after the 2 logs we have thiss: ", FILE_FORMATTED)
         fetch(Upload_Link,{
           method: 'post',
           headers:{
@@ -114,9 +128,11 @@ onChange={(name) => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
+            data: fakegpx,
             access_token: ACCESS_TOKEN,
           })
         }).then((res) => console.log(res.json()))
+        // )
       }
 
     function getToken(){

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx creator="StravaGPX" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+ <metadata>
+  <time>2022-12-14T18:46:46Z</time>
+ </metadata>
+ <trk>
+  <name>test f data </name>
+  <type>9</type>
+  <trkseg>
+  <trkpt lat="32.589670000000005" lon="-116.46756">
+    <ele>884.5600000000001</ele>
+    <time>2022-12-14T18:47:29Z</time>
+   </trkpt>
+   <trkpt lat="32.589710000000004" lon="-116.46698">
+    <ele>888.2</ele>
+    <time>2022-12-14T18:48:29Z</time>
+   </trkpt>
+   <trkpt lat="32.58983" lon="-116.46698">
+    <ele>887.1500000000001</ele>
+    <time>2022-12-14T18:49:29Z</time>
+   </trkpt>
+   <trkpt lat="132.58992" lon="-116.46702">
+    <ele>886.1700000000001</ele>
+    <time>2022-12-14T18:50:29Z</time>
+   </trkpt>
+  </trkseg>
+ </trk>
+</gpx>
